@@ -64,6 +64,8 @@
 				<span class="col-md-4"><input name="order_processing[<?php echo $order_number ?>][<?php echo $item_id  ?>][user_shipping_company]" placeholder="Return Shipping Company" value="<?php echo $user_shipping_company ?>" required></span>
 				<span class="col-md-4"><input name="order_processing[<?php echo $order_number ?>][<?php echo $item_id  ?>][user_track_number]" placeholder="Return Tracking Number" value="<?php echo $user_track_number ?>" required></span>
 				<span class="col-md-4"><input type="date" name="order_processing[<?php echo $order_number ?>][<?php echo  $item_id  ?>][user_track_date]" placeholder="Return Date" value="<?php echo $user_track_date ?>" required></span>
+				<input name="item_name" type="hidden" value="<?php echo $item["name"] ?>">
+				<input name="rma_num" type="hidden" value="<?php echo $rma_num ?>">
 				<button class="submit refund-button pull-right">Submit</button>
 				<div class="clear"></div>
 				<div style="display: none;" class="refund-popup">

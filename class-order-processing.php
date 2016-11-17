@@ -200,7 +200,8 @@ if ( ! class_exists( 'order_processing' ) ) {
 				$line_total = $_POST['line_total'];
 				$shipping_total = $_POST['shipping_total'];
 				$order_total = $_POST['order_total'];  	
-				$order_number = $_POST['order_number'];  	
+				$order_number = $_POST['order_number'];  
+				$item_name = $_POST['item_name'];
 				
 				if ( $_POST['order_action'] == 'item_refund' ){
 				
@@ -295,6 +296,8 @@ if ( ! class_exists( 'order_processing' ) ) {
 						$headers = 'MIME-Version: 1.0' . "\r\n";
 						$headers .= 'Content-type: text/html; charset=UTF-8' . "\r\n";
 						$email = get_option('order_processing_return_detailes_receiver');
+						$item_name = $_POST['item_name'];
+						$rma_num = $_POST['rma_num'];
 						if ( !$email ){
 							$email = get_option('order_processing_admin_email');
 						}	
@@ -302,6 +305,17 @@ if ( ! class_exists( 'order_processing' ) ) {
 							$email = get_option('admin_email');
 						}	
 						$email_content = 'Product on site '.get_bloginfo().' from order '.$order_number.' have returned';
+						$email_content .= '<br>';
+						$email_content .= 'Item name: ' . $item_name;
+						$email_content .= '<br>';
+						$email_content .= 'Return tracking date: ' . $opt['user_track_date'];
+						$email_content .= '<br>';
+						$email_content .= 'Return shipping company: ' . $opt['user_shipping_company'];
+						$email_content .= '<br>';
+						$email_content .= 'User track number: ' . $opt['user_track_number'];
+						$email_content .= '<br>';
+						$email_content .= 'RMA number: ' . $rma_num;
+						$email_content .= '<br>';
 						$from_name = get_option( 'order_processing_return_detailes_sender' );
 					
 						order_processing_send_email($email, $email_heading, $email_content, $from_name );
