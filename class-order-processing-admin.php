@@ -108,13 +108,6 @@ if ( ! class_exists( 'order_processing_admin' ) ) {
 					'default' => '',
 					'css'      => 'width:100%;max-width: 400px;',
 				),
-				'item_refund_receiver' => array(
-					'title'     => 'Item refund RECEIVER email',
-					'id'       => 'order_processing_item_refund_receiver',
-					'type'     => 'text',
-					'default' => '',
-					'css'      => 'width:100%;max-width: 400px;',
-				),
 				'return_detailes_sender' => array(
 					'title'     => 'Return detailes SENDER email',
 					'id'       => 'order_processing_return_detailes_sender',

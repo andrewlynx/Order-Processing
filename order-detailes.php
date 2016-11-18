@@ -44,9 +44,12 @@
 			<?php echo $this->popup_script(); ?>
 		</form>
 	<?php } ?>
-	<?php if ($status == 'Customer Return / Refund Requested'){ ?>
-		<p class="order-notice">Your request is currently being processed.<br/> Please allow up to 72 hours for us to process your request. Thank you.</p>
-	<?php } ?>
+	<?php 
+		$showed = get_option('order_processing['. $order_number .']['. $item_id .'][order_request_maessage_showed]');
+		if ($status == 'Customer Return / Refund Requested' AND !$showed){ ?>
+			<p class="order-notice">Your request is currently being processed.<br/> Please allow up to 72 hours for us to process your request. Thank you.</p>			
+	<?php update_option('order_processing['. $order_number .']['. $item_id .'][order_request_maessage_showed]', true);
+	} ?>
 	<?php if ($status == 'Awaiting Shipment Return') {
 		$user_shipping_company = get_option('order_processing[' .$order_number .']['. $item_id .'][user_shipping_company]');
 		$user_track_number = get_option('order_processing['. $order_number .']['. $item_id .'][user_track_number]');

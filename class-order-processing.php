@@ -58,9 +58,9 @@ if ( ! class_exists( 'order_processing' ) ) {
 			if (empty($shipping) || $shipping == 0){
 				$shipping = 'Free';
 			} else {
-				$shipping = '$'. $shipping * $quantity . ' USD';
+				$shipping = '$'. number_format($shipping, 2) * $quantity . ' USD';
 			}
-			echo '<td class="product-shipping">'. number_format($shipping, 2) .'</td>';	
+			echo '<td class="product-shipping">'. $shipping .'</td>';	
 		}
 		
 		/* Script for "date" input correct work in mozilla and mac */
@@ -214,8 +214,7 @@ if ( ! class_exists( 'order_processing' ) ) {
 					wp_update_post( $update_post_data );
 					wc_order_fully_refunded($order_id); 
 					
-					$email = get_option( 'order_processing_item_refund_receiver' );
-					if(empty($email)) $email = $order->billing_email;									
+					$email = $order->billing_email;								
 					$email_heading = 'Order refunded from '. get_bloginfo().'';
 					$email_content = 'Your order number '. $order_number .' on '. get_bloginfo().' has been refunded to your original payment method. This can take 7 to 14 working days to appear. You can get more details by logging in to <a href="'. get_permalink( get_option('woocommerce_myaccount_page_id') ) .'">Your account</a> page. Thank You.';
 					$from_name = get_option( 'order_processing_item_refund_sender' );
